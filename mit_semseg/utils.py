@@ -115,8 +115,14 @@ def colorEncode(labelmap, colors, mode='RGB'):
     for label in unique(labelmap):
         if label < 0:
             continue
+        # modified: sky/non-sky treatment
+        if label == 2:
+            color = np.array([255, 255, 255], dtype=np.uint8)
+        else:
+            color = np.array([0, 0, 0], dtype=np.uint8)
+
         labelmap_rgb += (labelmap == label)[:, :, np.newaxis] * \
-            np.tile(colors[label],
+            np.tile(color,
                     (labelmap.shape[0], labelmap.shape[1], 1))
 
     if mode == 'BGR':

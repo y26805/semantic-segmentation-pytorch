@@ -44,12 +44,10 @@ def visualize_result(data, pred, cfg):
     # colorize prediction
     pred_color = colorEncode(pred, colors).astype(np.uint8)
 
-    # aggregate images and save
-    im_vis = np.concatenate((img, pred_color), axis=1)
-
+    # modified: save pred image
     img_name = info.split('/')[-1]
-    Image.fromarray(im_vis).save(
-        os.path.join(cfg.TEST.result, img_name.replace('.jpg', '.png')))
+    Image.fromarray(pred_color).save(
+        os.path.join(cfg.TEST.result, img_name.replace('.jpg', '_sky.tif')))
 
 
 def test(segmentation_module, loader, gpu):

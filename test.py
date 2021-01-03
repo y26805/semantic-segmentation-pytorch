@@ -45,7 +45,7 @@ def visualize_result(data, pred, cfg):
     pred_color = colorEncode(pred, colors).astype(np.uint8)
 
     # modified: convert to greyscale and save image
-    gray = np.dot(pred_color[...,:3], [0.299, 0.587, 0.114])
+    gray = np.dot(pred_color[...,:3], [0.299, 0.587, 0.114])/255.0
     img_name = info.split('/')[-1]
     Image.fromarray(gray).save(
         os.path.join(cfg.TEST.result, img_name.replace('.jpg', '_sky.tif')))

@@ -44,9 +44,10 @@ def visualize_result(data, pred, cfg):
     # colorize prediction
     pred_color = colorEncode(pred, colors).astype(np.uint8)
 
-    # modified: save pred image
+    # modified: convert to greyscale and save image
+    gray = pred_color.convert('L')
     img_name = info.split('/')[-1]
-    Image.fromarray(pred_color).save(
+    Image.fromarray(gray).save(
         os.path.join(cfg.TEST.result, img_name.replace('.jpg', '_sky.tif')))
 
 
